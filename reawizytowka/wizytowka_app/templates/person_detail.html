@@ -1,0 +1,42 @@
+{% include "base.html" %}
+
+<
+
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+{% load static %}
+<link href="{% static "default.css" %}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+		<h1><a href="#">Oto Twoje dane  </a></h1>
+	</div>
+	<div id="content">
+		<div id="colOne">
+			<div class="latest-post">
+
+                <h2>{{person.name}} </h2>
+		
+                <img src = {{person.qr.url}} >
+		
+                <h2>{{person.name}} </h2>
+		
+            
+
+		
+			</div>
+</div>
+</body>
+
+
+
+
+</html>

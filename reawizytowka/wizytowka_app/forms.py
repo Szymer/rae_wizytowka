@@ -7,7 +7,13 @@ from wizytowka_app.models import PersonRecord
 
 
 
-class PersonDataInput(forms.Form):
+class PersonDataInput(forms.ModelForm):
     
-    name = forms.CharField(label= 'Twoje Imie i nazwisko')
-    name2 = forms.DateField(label_suffix="nie wiem")
+    class Meta:
+        model = PersonRecord
+        fields = ("name",
+                    "company_name",
+                    "phone",
+                    "email",
+                    "photo",
+                    "vcard_url",)
