@@ -18,10 +18,15 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
-from wizytowka_app.views import post_new_person, personDetail
+from wizytowka_app.views import post_new_person, personDetail, personList, leadFormView, leadFormViewStep2, leadFormViewStep3
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('person/<int:ipk>/', personDetail.as_view(), name= "person_detail"),
-    path('home/', post_new_person, name= "new_person")
+    path('home/', post_new_person, name= "new_person"),
+    path('traders/', personList.as_view(), name= "person_list"),
+    path('contact/<int:ipk>', leadFormView.as_view(), name= "lead_form"),
+    path('contact/<int:ipk>/step2', leadFormViewStep2.as_view(), name= "lead_form2"),
+    path('contact/<int:ipk>/step3', leadFormViewStep3.as_view(), name= "lead_form3"),
+     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
