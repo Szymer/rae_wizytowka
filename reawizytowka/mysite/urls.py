@@ -18,15 +18,19 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
-from wizytowka_app.views import post_new_person, personDetail, personList, leadFormView, leadFormViewStep2, leadFormViewStep3
+from django.contrib.auth  import views as auth_views
+from wizytowka_app.views import post_new_person, loginview, PersonDetail, PersonList, LeadFormView, LeadFormViewStep2, LeadFormViewStep3, LeadFormViewStep4, loginview, HomeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('person/<int:ipk>/', personDetail.as_view(), name= "person_detail"),
-    path('home/', post_new_person, name= "new_person"),
-    path('traders/', personList.as_view(), name= "person_list"),
-    path('contact/<int:ipk>', leadFormView.as_view(), name= "lead_form"),
-    path('contact/<int:ipk>/step2', leadFormViewStep2.as_view(), name= "lead_form2"),
-    path('contact/<int:ipk>/step3', leadFormViewStep3.as_view(), name= "lead_form3"),
+    path('home/', HomeView.as_view(), name= "home"),
+    path('accounts/login/', loginview, name='login'),
+    path('person/<int:ipk>/', PersonDetail.as_view(), name= "person_detail"),
+    path('new_vcard/', post_new_person, name= "new_vicard"),
+    path('traders/', PersonList.as_view(), name= "person_list"),
+    path('contact/<int:ipk>', LeadFormView.as_view(), name= "lead_form"),
+    path('contact/<int:ipk>/step2', LeadFormViewStep2.as_view(), name= "lead_form2"),
+    path('contact/<int:ipk>/step3', LeadFormViewStep3.as_view(), name= "lead_form3"),
+    path('contact/<int:ipk>/step4', LeadFormViewStep4.as_view(), name= "lead_form4"),
      
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

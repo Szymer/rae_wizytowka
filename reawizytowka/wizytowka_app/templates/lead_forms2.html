@@ -1,0 +1,29 @@
+{% include "index.html" %}
+
+{% block title%}
+<title> Dziekuje </title>
+{% endblock title%}
+<body>
+{% block content %}
+
+<div class="form-container">
+    <div class="header">
+        <img src="{{ trader.photo.url }}" alt="{{ trader.name }}">
+        <h1>Dziękuję!</h1>
+    </div>
+    <p>Za chwilę dostaniesz ode mnie SMS. Możesz podać jeszcze, jak mam Cię zapisać?</p>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="Name" placeholder="Twoje imię ">
+        <input type="text" name="Surname" placeholder="Twoje nazwisko">
+        <input type="email" name="email" placeholder="Adres email">
+        <input type="text" name="company" placeholder="Firma / miejsce kontaktu">
+        <button type="submit">DALEJ</button>
+    </form>
+    <p class="note">PS. Przejdź dalej, to zobaczysz mema!</p>
+    <a href="{{ card_download_url }}" class="download-button">POBIERZ WIZYTÓWKĘ</a>
+</div>
+   
+  {% endblock content  %}
+</body>
+</html>

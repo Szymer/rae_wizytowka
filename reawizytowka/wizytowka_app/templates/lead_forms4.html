@@ -1,0 +1,26 @@
+{% include "index.html" %}
+
+{% block title%}
+<title> Mem </title>
+{% endblock title%}
+<body>
+{% block content %}
+<div class="form-container">
+    <div class="header">
+        <img src="{{ trader.photo.url }}" alt="{{ trader.name }}">
+        <h1>W kontakcie!</h1>
+    </div>
+    <p>Dzięki za przekazanie kontaktu, mój otrzymasz do 5 minut. Do usłyszenia!</p>
+    <div class="meme">
+        <img src="{{ mem }}" alt="Meme">
+    </div>
+    <p>Tak, to ten mem! Jest ok?</p>
+    <div class="buttons">
+        <button type="button" class="negative">NIE OK</button>
+        <button type="button" class="positive">OK</button>
+
+    </div>
+</div>
+  {% endblock content  %}
+</body>
+</html>

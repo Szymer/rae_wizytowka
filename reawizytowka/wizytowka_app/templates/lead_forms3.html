@@ -1,0 +1,27 @@
+
+{% include "index.html" %}
+
+{% block title%}
+<title> Dziekuje </title>
+{% endblock title%}
+<body>
+{% block content %}
+
+<div class="form-container">
+    <div class="header">
+        <img src="{{ trader.photo.url }}" alt="{{ trader.name }}">
+        <h1>Aaaaa.. i jeszcze jedno </h1>
+    </div>
+    <p>Jeśli chiałbys zeby zadzwonił w konkretny dzien , godzine lub w temacie to napisz. Dzieki!</p>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="Data" placeholder="Data spotkania / rozmowy">
+        <input type="text" name="Temat" placeholder="Temat">
+        <button type="submit">DALEJ</button>
+    </form>
+    <p class="note">Pteraz juz napewno bedzie mem </p>
+</div>
+   
+  {% endblock content  %}
+</body>
+</html>

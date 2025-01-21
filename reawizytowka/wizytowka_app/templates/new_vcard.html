@@ -1,0 +1,22 @@
+{% include "index.html" %}
+
+{% block content %}
+<section id="hero">
+    <div class="container">
+        <div class="form-container">
+            <h1 class="header">Podaj swoje dane</h1>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+                <button type="submit">Dalej</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block footer %}
+
+{% endblock footer %}

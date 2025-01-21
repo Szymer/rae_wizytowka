@@ -1,0 +1,28 @@
+{% include "index.html" %}
+
+{% block title%}
+<title> kontakt </title>
+{% endblock title%}
+<body>
+{% block content %}
+
+    <div class="form-container">
+        <h1>Cześć, tu {{ trader.name }}, z {{ trader.company_name }}.</h1>
+        <p>Proszę, zostaw mi numer kontaktowy, a wyślę Ci moją wizytówkę.</p>
+        {% if trader.photo %}
+            <img src="{{ trader.photo.url }}" alt="{{ trader.name }}">
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if error %}
+                <p class="error">Niepoprawny format nr telefonu. Podaj proszę w taki sposób: +48xxxxxxxxx</p>
+            {% endif %}
+            <input type="text" name="phone" placeholder="Wpisz swój numer telefonu...">
+            <button type="submit">DALEJ</button>
+        </form>
+    </div>
+ 
+   
+  {% endblock content  %}
+</body>
+</html>

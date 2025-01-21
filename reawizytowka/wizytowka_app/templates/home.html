@@ -1,12 +1,17 @@
-{% include "base.html" %}
+{% include "index.html" %}
 
 {% block content %}
-   <form  method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Dalej</button>
-    </form>
-{%endblock content  %}
+<section id="hero">
+    <div class="container">
+        <h1 class="header">Witaj na naszej stronie!</h1>
+
+        <div class="button-container">
+            <a href="{% url 'login' %}" class="button">Logowanie</a>
+            <a href="{% url 'person_list' %}" class="button">Nasi Ludzie</a>
+        </div>
+    </div>
+</section>
+{% endblock content %}
 
 {% block footer %}
 
