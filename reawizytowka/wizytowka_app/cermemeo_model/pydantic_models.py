@@ -1,9 +1,13 @@
 from typing import List, Optional
 from pydantic import BaseModel
 
-
 from pydantic import BaseModel, EmailStr, Field, field_validator
 
+"""_summary_
+    Klasa zawierająca modele danych dla aplikacji cermemeo.
+    mozna wykorzystac do walidacji danych wejsciowych do API 
+    w tym projrkcie troche na wyrost ale mozna to wykorzystac
+"""
 class Comment(BaseModel):
     text: str
 

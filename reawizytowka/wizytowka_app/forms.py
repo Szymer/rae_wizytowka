@@ -3,10 +3,6 @@ from django import forms
 from wizytowka_app.models import PersonRecord
 
 
-
-
-
-
 class PersonDataInput(forms.ModelForm):
     
     class Meta:

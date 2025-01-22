@@ -21,11 +21,7 @@ from wizytowka_app.cermemeo_model.pydantic_models import LeadModel, Comment
 from wizytowka_app.cermemeo_api import CermemeoAPI
 
 
-
-
 HOST = "http://127.0.0.1:8000/"
-
-
 
 
 
@@ -49,7 +45,6 @@ def post_new_person(request):
         form = PersonDataInput(request.POST, request.FILES)
         if form.is_valid():
             person = form.save()
-            # person.save()
             qr = qrcode.make(f'{HOST}person/{person.pk}', )
             frame = Image.new('RGB', (292 ,292), 'white')
             draw = ImageDraw.Draw(frame)
@@ -84,8 +79,6 @@ class HomeView(View):
             return redirect('person_list')
         
     
-        
-
 class PersonDetail(View):
     
     def make_qurcode(self, person):
@@ -131,8 +124,7 @@ class LeadFormView(View):
             try:
                 lead = LeadModel(phone=phone, 
                                       campaign_token='666666')  #token zahardkodoany na produkcji podac w env
-                cache.set('lead', lead, timeout = 300)
-              
+                cache.set(f'lead_{phone}', lead, timeoucasched_lead = cache.get('lead') t = 300)
             except Exception as e:
                 print(e)
                 context = {'trader' : trader,
@@ -141,7 +133,6 @@ class LeadFormView(View):
             try:
                 casched_lead = cache.get('lead')
                 r =  self.api.post(casched_lead)
-                print(r)
             except Exception as e:
                 print(e) #dorobic obsluge bledow
             
@@ -160,7 +151,12 @@ class LeadFormViewStep2(LeadFormView):
         comnent1 = request.POST.get('company') if request.POST.get('company') else None
         trader  = get_object_or_404(PersonRecord, pk=ipk)
         try:
-            casched_lead = cache.get('lead')
+                
+            """w pełno wymiarowym projekcie trzeba rozbudowac cache 
+            każdy lead musi miec  unikalne id
+            najlepiej zgodne z PK z zewnetrznego api  lub zrezygnowac z Pydantic i zrobic to na modelach Django
+            """            
+            casched_lead = cache.get('lead') 
             print(casched_lead)
             casched_lead.name = name
             casched_lead.surname = surname
@@ -185,8 +181,8 @@ class LeadFormViewStep3(LeadFormView):
         return render(request, 'lead_forms3.html', context={'trader' : trader})
     
     def post(self, request, ipk, *args, **kwargs):
-        data = request.POST.get('Data')
-        miejsce = request.POST.get('Temat')
+        data = request.POST.get('Data') if request.POST.get('Data') else None
+        miejsce = request.POST.get('Temat') if request.POST.get('Temat') else None
         try:
             casched_lead = cache.get('lead')
             casched_lead.comments += [Comment(text = data), Comment(text = miejsce)]
@@ -196,7 +192,6 @@ class LeadFormViewStep3(LeadFormView):
             return render(request, 'lead_forms3.html',context)
         try:
             r =  self.api.post(casched_lead)
-            print(r)
         except Exception as e:
             print(e) #dorobic obsluge bledow
         return redirect( 'lead_form4', ipk=ipk)
@@ -207,6 +202,5 @@ class LeadFormViewStep4(LeadFormView):
         
         resp = rq.get('https://memy.pl/losuj', timeout= 10).content
         mem = html.fromstring(resp).xpath('//figure[@class="figure-item"]/a/img/@src')[0]
-        
         trader  = get_object_or_404(PersonRecord, pk=ipk)
         return render(request, 'lead_forms4.html', context={'trader' : trader, "mem" : mem})

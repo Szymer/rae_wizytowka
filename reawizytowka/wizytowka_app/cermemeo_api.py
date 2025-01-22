@@ -1,6 +1,9 @@
 from requests import post, Session
 
-
+    """zwalidowane dane z Pydantica przekazujemy do API zewnętrznego
+    w tym przypadku do systemu cermemeo
+    napewno wymaga przetestowania czy działa
+    """
 
 API_HOST = "https://url_systemu/api/v1/"
 
